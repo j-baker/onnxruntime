@@ -37,7 +37,7 @@ then
     cd ${ORT_SOURCE}
     git pull
     ./build.sh --parallel --cuda_home /usr/local/cuda --cudnn_home /usr/lib/x86_64-linux-gnu/ --use_tensorrt --tensorrt_home /usr/lib/x86_64-linux-gnu/ \
-               --config Release --build_shared_lib --update --build --cmake_extra_defines ONNXRUNTIME_VERSION=$(cat ./VERSION_NUMBER)
+               --config Debug --build_shared_lib --update --build --cmake_extra_defines ONNXRUNTIME_VERSION=$(cat ./VERSION_NUMBER)
 fi
 
 cd ${WORKSPACE}
@@ -56,7 +56,7 @@ mkdir result
 
 # Run valgrind
 echo $(date +"%Y-%m-%d %H:%M:%S") '[valgrind] Starting memcheck with' ${ONNX_MODEL}
-valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.log ${ORT_SOURCE}/build/Linux/Release/onnxruntime_perf_test -e tensorrt -r 1 ${ONNX_MODEL}
+valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.log ${ORT_SOURCE}/build/Linux/Release/onnxruntime_perf_test ./onnxruntime_perf_test -e tensorrt -r 100 -i "trt_engine_cache_enable|true trt_fp16_enable|true trt_layer_norm_fp32_fallback|true trt_max_workspace_size|4294967296" ${ONNX_MODEL}
 echo $(date +"%Y-%m-%d %H:%M:%S") '[valgrind] Analyzing valgrind log'
 
 found_leak_summary=false
