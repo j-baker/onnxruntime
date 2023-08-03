@@ -256,7 +256,7 @@ static void RunHTPConvOpTest(const std::string& conv_op_type, const TestInputDef
 // Check that QNN compiles DQ -> Conv -> Q as a single unit.
 // Tests bias as a dynamic input.
 // TODO: Segfaults when calling graphFinalize().
-TEST_F(QnnCPUBackendTests, DISABLED_TestCPUConvf32_dynamic_bias) {
+TEST_F(QnnCPUBackendTests, TestCPUConvf32_dynamic_bias) {
   RunCPUConvOpTest("Conv",
                    TestInputDef<float>({1, 1, 3, 3}, false, 0.0f, 10.0f),  // Random dynamic input
                    TestInputDef<float>({2, 1, 2, 2}, true, 0.0f, 1.0f),    // Random static weights
@@ -612,8 +612,8 @@ TEST_F(QnnHTPBackendTests, TestQDQConvTranspose1DU8U8S32_AutoPadLower) {
                             1e-4f);
 }
 
-// TODO: re-enable tests once HTP issues are resolved
-TEST_F(QnnHTPBackendTests, DISABLED_TestQDQConvU8U8S32_large_input1_padding_bias_initializer) {
+// TODO: re-enable tests once HTP issues are resolved, result mismatch
+TEST_F(QnnHTPBackendTests, TestQDQConvU8U8S32_large_input1_padding_bias_initializer) {
   RunHTPConvOpTest<uint8_t>("Conv",
                             TestInputDef<float>({1, 3, 60, 452}, false, 0.f, 10.f),        // Dynamic input
                             TestInputDef<float>({16, 3, 3, 3}, true, -1.f, 1.f),           // Static weights
@@ -625,7 +625,8 @@ TEST_F(QnnHTPBackendTests, DISABLED_TestQDQConvU8U8S32_large_input1_padding_bias
                             ExpectedEPNodeAssignment::All);
 }
 
-TEST_F(QnnHTPBackendTests, DISABLED_TestQDQConvU8S32_large_input2_bias_initializer) {
+// TODO: re-enable tests once HTP issues are resolved, result mismatch
+TEST_F(QnnHTPBackendTests, TestQDQConvU8S32_large_input2_bias_initializer) {
   RunHTPConvOpTest<uint8_t>("Conv",
                             TestInputDef<float>({1, 128, 8, 56}, false, 0.f, 10.f),  // Dynamic input
                             TestInputDef<float>({32, 128, 1, 1}, true, -1.f, 1.f),   // Random static weights
@@ -637,8 +638,8 @@ TEST_F(QnnHTPBackendTests, DISABLED_TestQDQConvU8S32_large_input2_bias_initializ
                             ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
-TEST_F(QnnHTPBackendTests, DISABLED_TestQDQConvU8U8S32_LargeInput_Dilations_Pads) {
+// TODO: re-enable tests once HTP issues are resolved, result mismatch
+TEST_F(QnnHTPBackendTests, TestQDQConvU8U8S32_LargeInput_Dilations_Pads) {
   RunHTPConvOpTest<uint8_t>("Conv",
                             TestInputDef<float>({1, 3, 768, 1152}, false, 0.f, 10.f),  // Dynamic input
                             TestInputDef<float>({64, 3, 7, 7}, true, -1.f, 1.f),       // Random static weights

@@ -142,8 +142,6 @@ static void RunQDQResizeOpTest(const std::vector<int64_t>& shape, const std::vec
 // CPU tests:
 //
 
-// TODO: Enable QnnCPU tests that use "nearest" mode.
-//
 // Our non-quantized implementation of Resize uses QNN's ResizeNearestNeighbor operator,
 // which is __not__ equivalent to ONNX's Resize operator with a single specific "nearest_mode".
 // The following disabled unit tests would pass if we removed the check in QNN EP that expects the
@@ -152,56 +150,57 @@ static void RunQDQResizeOpTest(const std::vector<int64_t>& shape, const std::vec
 
 // Upsample that uses "round_prefer_floor" as the "nearest_mode".
 // coordinate_transformation_mode: "half_pixel"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeUpsampleNearestHalfPixel_rpf) {
+TEST_F(QnnCPUBackendTests, TestResizeUpsampleNearestHalfPixel_rpf) {
   RunCPUResizeOpTest({1, 2, 7, 5}, {1, 2, 21, 10}, "nearest", "half_pixel", "round_prefer_floor",
                      ExpectedEPNodeAssignment::All);
 }
 
 // Upsample that uses "round_prefer_ceil" as the "nearest_mode".
 // coordinate_transformation_mode: "half_pixel"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeUpsampleNearestHalfPixel_rpc) {
+TEST_F(QnnCPUBackendTests, TestResizeUpsampleNearestHalfPixel_rpc) {
   RunCPUResizeOpTest({1, 1, 2, 4}, {1, 1, 7, 5}, "nearest", "half_pixel", "round_prefer_ceil",
                      ExpectedEPNodeAssignment::All);
 }
 
 // Downsample that uses "round_prefer_ceil" as the "nearest_mode".
 // coordinate_transformation_mode: "half_pixel"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeDownsampleNearestHalfPixel_rpc) {
+TEST_F(QnnCPUBackendTests, TestResizeDownsampleNearestHalfPixel_rpc) {
   RunCPUResizeOpTest({1, 1, 2, 4}, {1, 1, 1, 3}, "nearest", "half_pixel", "round_prefer_ceil",
                      ExpectedEPNodeAssignment::All);
 }
 
 // Downsample that uses "round_prefer_floor" as the "nearest_mode".
 // coordinate_transformation_mode: "half_pixel"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeDownsampleNearestHalfPixel_rpf) {
+TEST_F(QnnCPUBackendTests, TestResizeDownsampleNearestHalfPixel_rpf) {
   RunCPUResizeOpTest({1, 1, 2, 4}, {1, 1, 1, 2}, "nearest", "half_pixel", "round_prefer_ceil",
                      ExpectedEPNodeAssignment::All);
 }
 
 // Upsample that uses "round_prefer_floor" as the "nearest_mode".
-// coordinate_transformation_mode: "align_corners"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeUpsampleNearestAlignCorners_rpf) {
+// coordinate_transformation_mode: "align_corners", result mismatch
+// index #50 don't match, which is 4.67152 from 8.06485
+TEST_F(QnnCPUBackendTests, TestResizeUpsampleNearestAlignCorners_rpf) {
   RunCPUResizeOpTest({1, 2, 7, 5}, {1, 2, 21, 10}, "nearest", "align_corners", "round_prefer_floor",
                      ExpectedEPNodeAssignment::All);
 }
 
 // Upsample that uses "round_prefer_ceil" as the "nearest_mode".
 // coordinate_transformation_mode: "align_corners"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeUpsampleNearestAlignCorners_rpc) {
+TEST_F(QnnCPUBackendTests, TestResizeUpsampleNearestAlignCorners_rpc) {
   RunCPUResizeOpTest({1, 1, 2, 4}, {1, 1, 7, 5}, "nearest", "align_corners", "round_prefer_ceil",
                      ExpectedEPNodeAssignment::All);
 }
 
 // Downsample that uses "round_prefer_ceil" as the "nearest_mode".
 // coordinate_transformation_mode: "align_corners"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeDownsampleNearestAlignCorners_rpc) {
+TEST_F(QnnCPUBackendTests, TestResizeDownsampleNearestAlignCorners_rpc) {
   RunCPUResizeOpTest({1, 1, 2, 4}, {1, 1, 1, 3}, "nearest", "align_corners", "round_prefer_ceil",
                      ExpectedEPNodeAssignment::All);
 }
 
 // Downsample that uses "round_prefer_floor" as the "nearest_mode".
 // coordinate_transformation_mode: "align_corners"
-TEST_F(QnnCPUBackendTests, DISABLED_TestResizeDownsampleNearestAlignCorners_rpf) {
+TEST_F(QnnCPUBackendTests, TestResizeDownsampleNearestAlignCorners_rpf) {
   RunCPUResizeOpTest({1, 1, 2, 4}, {1, 1, 1, 2}, "nearest", "align_corners", "round_prefer_floor",
                      ExpectedEPNodeAssignment::All);
 }

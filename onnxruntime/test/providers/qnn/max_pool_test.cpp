@@ -217,6 +217,7 @@ TEST_F(QnnCPUBackendTests, TestMaxPool_Large_Input2) {
 }
 
 // TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// QNN v2.13, backendValidateOpConfig() failed for node `MaxPool` of type `PoolMax2d` with error code 4003
 TEST_F(QnnCPUBackendTests, DISABLED_TestMaxPool_Ceil) {
   RunMaxPoolOpTest({1, 2, 3, 3},  // shape
                    {3, 3},        // kernel_shape
@@ -229,7 +230,7 @@ TEST_F(QnnCPUBackendTests, DISABLED_TestMaxPool_Ceil) {
                    ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// QNN v2.13, backendValidateOpConfig() failed for node `MaxPool` of type `PoolMax2d` with error code 4003
 TEST_F(QnnCPUBackendTests, DISABLED_TestMaxPool_Large_Input2_Ceil) {
   RunMaxPoolOpTest({1, 128, 16, 113},  // shape
                    {2, 2},             // kernel_shape
@@ -259,7 +260,7 @@ TEST_F(QnnHTPBackendTests, TestMaxPool_Global_HTP_u8) {
                                ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// QNN v2.13, output mismatch: index #17 don't match, which is 0.00379997 from 0.2774
 TEST_F(QnnHTPBackendTests, DISABLED_TestMaxPool_Large_Input_HTP_u8) {
   RunQDQMaxPoolOpTest<uint8_t>({1, 125, 8, 56},  // shape
                                {2, 2},           // kernel_shape
@@ -272,7 +273,7 @@ TEST_F(QnnHTPBackendTests, DISABLED_TestMaxPool_Large_Input_HTP_u8) {
                                ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// QNN v2.13 index #6 don't match, which is 0.00379999 from 0.1976
 TEST_F(QnnHTPBackendTests, DISABLED_TestMaxPool_Large_Input2_HTP_u8) {
   RunQDQMaxPoolOpTest<uint8_t>({1, 128, 16, 113},  // shape
                                {2, 2},             // kernel_shape
@@ -297,7 +298,7 @@ TEST_F(QnnHTPBackendTests, TestMaxPool_Ceil_HTP_u8) {
                                ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// QNN v2.13 index #6 don't match, which is 0.00379999 from 0.1976
 TEST_F(QnnHTPBackendTests, DISABLED_TestMaxPool_Large_Input2_Ceil_HTP_u8) {
   RunQDQMaxPoolOpTest<uint8_t>({1, 128, 16, 113},  // shape
                                {2, 2},             // kernel_shape
@@ -310,7 +311,7 @@ TEST_F(QnnHTPBackendTests, DISABLED_TestMaxPool_Large_Input2_Ceil_HTP_u8) {
                                ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// TODO: QNN v2.13 Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
 TEST_F(QnnHTPBackendTests, DISABLED_TestMaxPool_LargeInput_1Pads) {
   RunQDQMaxPoolOpTest<uint8_t>({1, 64, 384, 576},  // shape
                                {3, 3},             // kernel_shape

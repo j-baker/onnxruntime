@@ -110,7 +110,7 @@ TEST_F(QnnHTPBackendTests, TestQDQInstanceNormU8Rank3) {
                          ExpectedEPNodeAssignment::All);
 }
 
-// TODO: This test now fails in QNN SDK version 2.12.0 (windows arm64 and linux x86_64).
+// TODO: This test now fails in QNN SDK version 2.13, 2.12.0 (windows arm64 and linux x86_64).
 // This worked in QNN SDK version 2.10.0. Need to determine the severity of this inaccuracy.
 //
 // Exepcted output: 2 6 2 42 42 0

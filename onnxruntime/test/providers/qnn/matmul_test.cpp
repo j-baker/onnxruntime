@@ -150,16 +150,14 @@ TEST_F(QnnHTPBackendTests, TestMatMulOp_HTP_u8) {
                                 18, 0.00381f);
 }
 
-// QNN broadcast issue
-TEST_F(QnnHTPBackendTests, DISABLED_TestMatMulOp2_HTP_u8) {
+TEST_F(QnnHTPBackendTests, TestMatMulOp2_HTP_u8) {
   RunQDQMatMulOpOpTest<uint8_t>({28, 1, 64} /* input_shape1 */,
                                 {64, 32} /* input_shape2 */,
                                 ExpectedEPNodeAssignment::All,
                                 18, 0.00381f);
 }
 
-// QNN broadcast issue
-TEST_F(QnnHTPBackendTests, DISABLED_TestMatMulOp3_HTP_u8) {
+TEST_F(QnnHTPBackendTests, TestMatMulOp3_HTP_u8) {
   RunQDQMatMulOpOpTest<uint8_t>({28, 1, 32} /* input_shape1 */,
                                 {32, 2} /* input_shape2 */,
                                 ExpectedEPNodeAssignment::All,

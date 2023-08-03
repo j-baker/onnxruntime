@@ -250,7 +250,7 @@ TEST_F(QnnHTPBackendTests, TestSub4D_SmallInputs) {
                                      17, ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// TODO: QNN v2.13, index #602 don't match, which is -0.0004 from 0.0036
 // Enable when this is fixed.
 TEST_F(QnnHTPBackendTests, DISABLED_TestSub4D_LargeInputs) {
   RunQDQBinaryOpTest<float, uint8_t>("Sub", TestInputDef<float>({1, 3, 768, 1152}, false, -1.0f, 1.0f),
@@ -258,7 +258,7 @@ TEST_F(QnnHTPBackendTests, DISABLED_TestSub4D_LargeInputs) {
                                      17, ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// TODO: QNN v2.13, index #1504 don't match, which is 0.000399999 from -0.0192
 // Enable when this is fixed.
 TEST_F(QnnHTPBackendTests, DISABLED_TestSub4D_Broadcast) {
   RunQDQBinaryOpTest<float, uint8_t>("Sub", TestInputDef<float>({1, 3, 768, 1152}, false, -1.0f, 1.0f),
@@ -272,7 +272,7 @@ TEST_F(QnnHTPBackendTests, TestDiv4D_SmallInputs) {
                                      17, ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// TODO: QNN v2.13, index #80186 don't match, which is -0.008 from -0.0392
 // Enable when this is fixed.
 TEST_F(QnnHTPBackendTests, DISABLED_TestDiv4D_LargeInputs) {
   RunQDQBinaryOpTest<float, uint8_t>("Div", TestInputDef<float>({1, 3, 768, 1152}, false, -1.0f, 1.0f),
@@ -280,7 +280,7 @@ TEST_F(QnnHTPBackendTests, DISABLED_TestDiv4D_LargeInputs) {
                                      17, ExpectedEPNodeAssignment::All);
 }
 
-// TODO: Certain large input sizes cause the QNN graph to fail to finalize with error 1002 (QNN_COMMON_ERROR_MEM_ALLOC).
+// TODO: QNN v2.13, index #80186 don't match, which is 0.0076 from 0.0392
 // Enable when this is fixed.
 // Fails accuracy when input0 has dims [1,3,768,768]
 TEST_F(QnnHTPBackendTests, DISABLED_TestDiv4D_Broadcast) {
